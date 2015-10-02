@@ -20,11 +20,13 @@
 		
 	// lisame kasutaja andmebaasi
 
-	function createUser(){
+	function createUser($create_email, $password_hash){
 		
-		$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"],  $GLOBALS["server_password"],  $GLOBALS["database"]);
+		
 		// asendame ?-märgid muuttujate väärtustega
 		// ss - s t2hendab string iga muutuja kohta
+		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
 		$stmt->bind_param("ss", $create_email, $password_hash);
 		$stmt->execute();
 		$stmt->close();		
@@ -34,9 +36,12 @@
 	}
 	
 	// logime sisse
-	function loginUser(){
+	function loginUser($email, $password_hash){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"],  $GLOBALS["server_password"],  $GLOBALS["database"]);
+		
+		
+		
 		
 		$stmt=$mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);

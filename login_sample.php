@@ -35,7 +35,7 @@
 				
 				$password_hash = hash("sha512", $password);
 				
-				loginUser ();			
+				loginUser ($email, $password_hash);			
 							
 				
 			}
@@ -64,11 +64,11 @@
 				$password_hash = hash("sha512", $create_password);
 				echo "<br>";
 				echo $password_hash;
-			$stmt = $mysqli->prepare("INSERT INTO user_sample(email, password) VALUE(?,?)");
+
 				
 				// echo $mysqli ->error;
 				// echo $stmt->error;
-				createUser ();
+				createUser ($create_email, $password_hash);
 				
 			
 	 }
