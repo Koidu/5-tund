@@ -1,7 +1,15 @@
 <?php
 	// laeme funktsiooni failis
 	require_once("functions.php");
-
+	
+	// kontrollin, kas kasutaja on sisse loginud
+	if(isset($_SESSION["id_from_db"])){
+			// suunan data.php lehele
+			header("Location: data.php");
+	}
+	
+	
+	
     
   // muuutujad errorite jaoks
 	$email_error = "";
