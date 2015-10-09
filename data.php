@@ -38,11 +38,23 @@
 			
 			if(	$car_plate_error == "" && $color_error == ""){
 				
+				// msg on message funktsioonist
+				$msg = createCarPlate ($car_plate, $color);
 				
-				createCarPlate ($car_plate, $color);
+				if ($msg !=""){
+					// Salvestamine õnnestus
+					// teen tühjaks input value
+					$car_palte = "";
+					$color = "";
+					
+					echo $msg;
+					
+					
+					
+				}
 				
 			
-	 }
+			}
     } // create if end
   // funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
   function cleanInput($data) {

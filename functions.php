@@ -69,6 +69,8 @@
 			$mysqli->close();
 	}
 	
+	
+	// autonumbri tabeli jaoks
 	function createCarPlate($car_plate, $color){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"],  $GLOBALS["server_password"],  $GLOBALS["database"]);
@@ -77,11 +79,23 @@
 		// ss - s t2hendab string iga muutuja kohta
 		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
 		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
-		$stmt->execute();
-		echo $stmt->error;
+		
+		
+		if($stmt->execute()){
+			// see on tõene siis, kui sisestus ab´i õnnestus
+			$message = "Edukalt sisestatud andmebaasi";
+			
+			
+		}else{
+			// kui miski läks katki
+			echo $stmt->error;			
+		}
+		
+		
 		$stmt->close();		
 		$mysqli->close();
 		
+		return $message;
 	}
 	
 	
